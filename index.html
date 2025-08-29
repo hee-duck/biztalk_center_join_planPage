@@ -85,31 +85,29 @@
       <p style="margin:12px 0 0; font-size:12px; color:#6B7280;">※ 모든 요금은 부가세 별도이며, 성공 건수 기준으로 과금됩니다.</p>
     </section>
 
-    <!-- 요금제 계산기 섹션 (견적서 스타일 매칭) -->
+      <!-- 요금제 계산기 섹션 -->
     <section aria-label="요금제 계산기"
       style="margin-top:32px; background:#FFFFFF; border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; box-shadow:0 8px 20px rgba(17,24,39,0.06);">
-      <!-- 헤더 -->
       <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between; background:#F9FAFB; border-bottom:1px solid #E5E7EB;">
         <h3 style="margin:0; font-size:18px;">알림톡 예상 발송 건수</h3>
         <span style="font-size:12px; color:#6B7280;">부가세 별도</span>
       </div>
-    
-      <!-- 본문 -->
+
       <div style="padding:20px;">
-        <!-- 발송건수(좌) + 부가세(우) 한 줄 -->
+        <!-- 발송건수(좌) + 부가세(우) -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; flex-direction:column; min-width:0;">
             <label for="calc_volume" style="font-size:13px; color:#6B7280; margin-bottom:6px;">예상 발송 건수 (월)</label>
             <input id="calc_volume" type="number" min="0" step="1" value="10000"
               style="width:100%; padding:10px 12px; border:1px solid #E5E7EB; border-radius:10px; font-size:15px; background:#fff; color:#111827;" />
           </div>
-          <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; flex-direction:column; min-width:0;">
             <label style="font-size:13px; color:#6B7280; margin-bottom:6px;">부가세(10%)</label>
             <input type="text" value="별도(미포함)" disabled
               style="width:100%; padding:10px 12px; border:1px solid #E5E7EB; border-radius:10px; font-size:15px; background:#fff; color:#111827;" />
           </div>
         </div>
-    
+
         <!-- 체크박스 -->
         <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:12px;">
           <label style="color:#111827; font-size:14px; margin:0;">
@@ -119,8 +117,8 @@
             <input type="checkbox" id="calc_useBizting"> 비즈팅 광고 메시지 사용
           </label>
         </div>
-    
-        <!-- 도움말(체크 시 표시, 해제 시 숨김) -->
+
+        <!-- 도움말 -->
         <div id="calc_helperChatbot"
           style="display:none; margin-top:8px; padding:10px 12px; border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF;">
           <strong style="color:#064e3b;">챗봇</strong><br />
@@ -132,33 +130,20 @@
           비즈팅은 통신사, 카드사 및 포인트사 고객을 대상으로 정밀한 타겟 조건을 설정하여,
           내 고객이 아닌 잠재 고객에게 마케팅 메시지를 발송할 수 있는 프리미엄 메시지 마케팅 서비스입니다.
         </div>
-    
-        <!-- 결과 카드형 영역 -->
-        <div style="margin-top:16px; background:#FFFFFF; border:1px solid #E5E7EB; border-radius:12px; padding:16px;">
-          <h4 style="margin:0 0 10px; font-size:16px;">추천 요금제</h4>
-          <!-- KPI -->
-          <div style="display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:10px;">
-            <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:12px; text-align:center;">
-              <div id="calc_k_total" style="font-weight:700; font-size:18px; margin-bottom:2px;">-</div>
-              <div style="font-size:12px; color:#6B7280;">추천 요금제 총 비용(부가세 별도)</div>
-            </div>
-          </div>
-          <div style="font-size:12px; color:#6B7280; margin-bottom:8px;">
-            추천 요금제에는 <span style="display:inline-block; padding:2px 8px; border-radius:9999px; background:#E5EDFF; color:#1e40af; border:1px solid #c7d2fe;">BEST</span> 가 표시됩니다.
-          </div>
-    
-          <!-- 결과 테이블 -->
-          <div style="overflow-x:auto;">
-            <table id="calc_cmp" role="table" style="width:100%; border-collapse:collapse; font-size:14px; min-width:520px;">
-              <thead style="background:#F9FAFB;">
-                <tr>
-                  <th style="text-align:left; padding:10px 8px; border-bottom:1px solid #E5E7EB;">요금제</th>
-                  <th style="text-align:right; padding:10px 8px; border-bottom:1px solid #E5E7EB;">총 비용</th>
-                </tr>
-              </thead>
-              <tbody><!-- JS 렌더링 --></tbody>
-            </table>
-          </div>
+
+        <!-- 결과 테이블 -->
+        <div style="margin-top:16px; overflow-x:auto;">
+          <table id="calc_cmp" role="table" style="width:100%; border-collapse:collapse; font-size:14px; min-width:600px;">
+            <thead style="background:#F9FAFB;">
+              <tr>
+                <th style="text-align:left; padding:10px 8px; border-bottom:1px solid #E5E7EB;">요금제</th>
+                <th style="text-align:right; padding:10px 8px; border-bottom:1px solid #E5E7EB;">기본료</th>
+                <th style="text-align:right; padding:10px 8px; border-bottom:1px solid #E5E7EB;">메시지 발송료</th>
+                <th style="text-align:right; padding:10px 8px; border-bottom:1px solid #E5E7EB;">총 예상비용</th>
+              </tr>
+            </thead>
+            <tbody><!-- JS 렌더링 --></tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -166,7 +151,7 @@
     <!-- 비교표 -->
     <section aria-label="요금 세부 비교표" style="margin-top:32px; background:#FFFFFF; border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; box-shadow:0 8px 20px rgba(17,24,39,0.06);">
       <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between; background:#F9FAFB; border-bottom:1px solid #E5E7EB;">
-        <h3 style="margin:0; font-size:18px;">상세 단가 비교</h3>
+        <h3 style="margin:0; font-size:18px;">상세 상품 단가</h3>
         <span style="font-size:12px; color:#6B7280;">단위: 원(부가세 별도)</span>
       </div>
       <div style="overflow-x:auto;">
@@ -329,77 +314,72 @@
       </div>
     </section>
 
-    <script>
-  // 요금제 정의 (견적서 명칭과 일치)
-  const CALC_PLANS = {
-    basic:   { name: "스타터",   monthly: 10000,  free: 0,     unit: 8 },
-    flat:    { name: "스탠다드", monthly: 49000,  free: 7000,  unit: 7 },
-    premium: { name: "프리미엄", monthly: 99000,  free: 15000, unit: 6 },
-    ultra:   { name: "울트라",   monthly: 150000, free: 0,     unit: 5 }
-  };
+   <script>
+      const CALC_PLANS = {
+        basic:   { name: "스타터",   monthly: 10000,  free: 0,     unit: 8 },
+        flat:    { name: "스탠다드", monthly: 49000,  free: 7000,  unit: 7 },
+        premium: { name: "프리미엄", monthly: 99000,  free: 15000, unit: 6 },
+        ultra:   { name: "울트라",   monthly: 150000, free: 0,     unit: 5 }
+      };
 
-  const $ = (id) => document.getElementById(id);
-  const fmt = (n) => n.toLocaleString('ko-KR');
+      const $ = (id) => document.getElementById(id);
+      const fmt = (n) => n.toLocaleString('ko-KR');
 
-  function calcForPlan(key, volume) {
-    const p = CALC_PLANS[key];
-    const billable = Math.max(0, volume - p.free);
-    const subtotal = p.monthly + billable * p.unit; // VAT 제외
-    return { key, name: p.name, subtotal };
-  }
-
-  function renderTable(results, bestKey) {
-    const tbody = $("calc_cmp").querySelector("tbody");
-    tbody.innerHTML = "";
-    results.sort((a,b)=>a.subtotal-b.subtotal).forEach(r => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td style="text-align:left; padding:10px 8px; border-bottom:1px solid #F3F4F6;">
-          ${r.name}${r.key===bestKey ? ' <span style="display:inline-block; padding:2px 8px; border-radius:9999px; background:#E5EDFF; color:#1e40af; border:1px solid #c7d2fe;">BEST</span>' : ''}
-        </td>
-        <td style="text-align:right; padding:10px 8px; border-bottom:1px solid #F3F4F6;">${fmt(r.subtotal)}원</td>
-      `;
-      if (r.key === bestKey) {
-        tr.style.background = "#ECFDF5"; // 강조 배경
+      function calcForPlan(key, volume) {
+        const p = CALC_PLANS[key];
+        const billable = Math.max(0, volume - p.free);
+        const sendFee = billable * p.unit;
+        const subtotal = p.monthly + sendFee; // VAT 제외
+        return { key, name: p.name, monthly: p.monthly, sendFee, subtotal };
       }
-      tbody.appendChild(tr);
-    });
-  }
 
-  function recomputeCalc() {
-    const volume     = Math.max(0, parseInt(($("calc_volume").value || "0"), 10));
-    const useChatbot = $("calc_useChatbot").checked;
-    const useBizting = $("calc_useBizting").checked;
+      function renderTable(results, bestKey) {
+        const tbody = $("calc_cmp").querySelector("tbody");
+        tbody.innerHTML = "";
+        results.sort((a,b)=>a.subtotal-b.subtotal).forEach(r => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td style="text-align:left; padding:10px 8px; border-bottom:1px solid #F3F4F6;">
+              ${r.name}${r.key===bestKey ? ' <span style="display:inline-block; padding:2px 8px; border-radius:9999px; background:#E5EDFF; color:#1e40af; border:1px solid #c7d2fe;">BEST</span>' : ''}
+            </td>
+            <td style="text-align:right; padding:10px 8px; border-bottom:1px solid #F3F4F6;">${fmt(r.monthly)}원</td>
+            <td style="text-align:right; padding:10px 8px; border-bottom:1px solid #F3F4F6;">${fmt(r.sendFee)}원</td>
+            <td style="text-align:right; padding:10px 8px; border-bottom:1px solid #F3F4F6; font-weight:${r.key===bestKey?'700':'400'};">${fmt(r.subtotal)}원</td>
+          `;
+          if (r.key === bestKey) {
+            tr.style.background = "#ECFDF5";
+          }
+          tbody.appendChild(tr);
+        });
+      }
 
-    // 도움말 토글
-    $("calc_helperChatbot").style.display = useChatbot ? "block" : "none";
-    $("calc_helperBizting").style.display = useBizting ? "block" : "none";
+      function recomputeCalc() {
+        const volume     = Math.max(0, parseInt(($("calc_volume").value || "0"), 10));
+        const useChatbot = $("calc_useChatbot").checked;
+        const useBizting = $("calc_useBizting").checked;
 
-    // 전체 요금제 계산
-    const results = Object.keys(CALC_PLANS).map(k => calcForPlan(k, volume));
+        // 도움말 토글
+        $("calc_helperChatbot").style.display = useChatbot ? "block" : "none";
+        $("calc_helperBizting").style.display = useBizting ? "block" : "none";
 
-    // 추천 로직: 챗봇/비즈팅 사용 시 울트라 고정 추천, 미사용이면 최소 총비용 추천
-    let bestKey;
-    if (useChatbot || useBizting) {
-      bestKey = "ultra";
-    } else {
-      bestKey = results.reduce((min, r) => r.subtotal < min.subtotal ? r : min, results[0]).key;
-    }
+        const results = Object.keys(CALC_PLANS).map(k => calcForPlan(k, volume));
 
-    // KPI (추천 요금제 총비용)
-    const best = results.find(r => r.key === bestKey);
-    $("calc_k_total").textContent = best ? (fmt(best.subtotal) + "원") : "-";
+        let bestKey;
+        if (useChatbot || useBizting) {
+          bestKey = "ultra";
+        } else {
+          bestKey = results.reduce((min, r) => r.subtotal < min.subtotal ? r : min, results[0]).key;
+        }
 
-    // 결과 테이블 렌더
-    renderTable(results, bestKey);
-  }
+        renderTable(results, bestKey);
+      }
 
-  ["calc_volume", "calc_useChatbot", "calc_useBizting"].forEach(id => {
-    const node = $(id);
-    if (!node) return;
-    node.addEventListener("input", recomputeCalc);
-    node.addEventListener("change", recomputeCalc);
-  });
+      ["calc_volume", "calc_useChatbot", "calc_useBizting"].forEach(id => {
+        const node = $(id);
+        if (!node) return;
+        node.addEventListener("input", recomputeCalc);
+        node.addEventListener("change", recomputeCalc);
+      });
 
-  window.addEventListener("DOMContentLoaded", recomputeCalc);
-</script>
+      window.addEventListener("DOMContentLoaded", recomputeCalc);
+    </script>
